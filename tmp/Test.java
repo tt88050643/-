@@ -1,26 +1,50 @@
-class Value{ 
-	public int i=15; 
-} 
-public class Test{ 
-
-	public static void main(String argv[]){ 
-		Test t=new Test( ); 
-		t.first( ); 
+class Root{
+	static{
+		System.out.println("Root 的静态初始化块");
 	} 
+	{
+		System.out.println("Root 的普通初始化块");
+	}
+	public Root(){
+		System.out.println("Root 的无参数构造器");
+	}
+}
 
-	public void first( ){ 
-		int i=5; 
-		Value v=new Value( ); 
-		v.i=25; 
-		second(v,i); 
-		System.out.println(v.i); 
-	} 
+class Mid extends Root{
+	static{
+		System.out.println("Mid 的静态初始化块");
+	}
+	{
+		System.out.println("Mid 的普通初始化块");
+	}
+	
+	public Mid(){
+		System.out.println("Mid 的无参数的构造器");
+	}
+	
+	public Mid(String msg){
+		this();
+		System.out.println("Mid 的带参数构造器，其参数指：" + msg);
+	}
+}
 
-	public void second(Value v,int i){ 
-		i = 0; 
-		v.i = 20; 
-		Value val = new Value( ); 
-		v = val; 
-		System.out.println(v.i+" "+i); 
-	} 
+class Leaf extends Mid{
+	static{
+		System.out.println("Leaf 的静态初始化块");
+	}
+	{
+		System.out.println("Leaf 的普通初始化块");
+	}
+	public Leaf(){
+		super("疯狂Java讲义");
+		System.out.println("执行Leaf的构造器");
+	}
+}
+
+public class Test{
+	public static void main(String[] args){
+		new Leaf();
+		System.out.println("------------------------");
+		new Leaf();
+	}
 }
