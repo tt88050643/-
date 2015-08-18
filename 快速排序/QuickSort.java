@@ -7,10 +7,10 @@ public class QuickSort{
 		int tmpRight = right;
 		while(tmpLeft <= tmpRight){
 			for(; tmpLeft<=tmpRight; tmpLeft++){
-				if(arr[tmpLeft] >= arr[point]) break;
+				if(arr[tmpLeft] > arr[point]) break;
 			}
 			for(; tmpRight>=tmpLeft; tmpRight--){
-				if(arr[tmpRight] <= arr[point]) break;
+				if(arr[tmpRight] < arr[point]) break;
 			}
 			if(tmpLeft <= tmpRight){
 				int tmp = arr[tmpLeft];
