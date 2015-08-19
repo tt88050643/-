@@ -1,48 +1,43 @@
 public class QuickSort{
 	public static void main(String[] args){
-		int[] arr = {3, 5, 12, 34, 1, 2, 2};
+		int[] arr = {3, 5, 12, 34, 1, 2, 3, 4, 3, 34};
 		sort(arr, 0, arr.length - 1);
 		for(int eachone : arr){
 			System.out.println(eachone);
 		}
+		
 	}
 	
 	public static void sort(int[] arr, int left, int right){
 		if(left >= right) return;
-		else{
-			int point = right;
-			int fengeP = 0;
-			fengeP = fenge(arr, left, point - 1, point);
-			sort(arr, left, fengeP - 1);
-			sort(arr, fengeP + 1, right);
-		}
-		
+		int fengP = partition(arr, left, right - 1, right);
+		sort(arr, left, fengP - 1);
+		sort(arr, fengP + 1, right);
 	}
 	
-	public static int fenge(int[] arr, int left, int right, int point){
-		int leftTmp = left;
-		int rightTmp = right;
+	public static int partition(int[] arr, int left, int right, int point){
+		int tmpLeft = left;
+		int tmpRight = right;
 		int tmpVal = 0;
-		while(leftTmp < rightTmp){
-			while(leftTmp <= rightTmp){
-				if(arr[leftTmp] >= arr[point]) break;
-				leftTmp++;
+		while(tmpLeft <= tmpRight){
+			while(tmpLeft <= tmpRight){
+				if(arr[tmpLeft] > arr[point]) break;
+				tmpLeft++;
 			}
-			while(leftTmp <= rightTmp){
-				if(arr[rightTmp] <= arr[point]) break;
-				rightTmp--;
+			while(tmpLeft <= tmpRight){
+				if(arr[tmpRight] < arr[point]) break;
+				tmpRight--;
 			}
-			
-			if(leftTmp <= rightTmp){
-				tmpVal = arr[leftTmp];
-				arr[leftTmp] = arr[rightTmp];
-				arr[rightTmp] = tmpVal;
+			if(tmpLeft <= tmpRight){
+				tmpVal = arr[tmpLeft];
+				arr[tmpLeft] = arr[tmpRight];
+				arr[tmpRight] = tmpVal;
 			}else{
-				tmpVal = arr[leftTmp];
-				arr[leftTmp] = arr[point];
+				tmpVal = arr[tmpLeft];
+				arr[tmpLeft] = arr[point];
 				arr[point] = tmpVal;
 			}
 		}
-		return leftTmp;
+		return tmpLeft;
 	}
 }
